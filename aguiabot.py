@@ -6,6 +6,18 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions
 from datetime import datetime
 
+def send_temp_message(ctx, msg, tempo):
+    """
+    :param ctx: Contexto
+    :param msg: Mensagem que vai ser enviada
+    :param tempo: O tempo em segundos até a mensagem ser apagada
+    """
+    if isinstance(msg, discord.Embed):
+        temp_msg = await ctx.send(embed=msg)
+    else:
+        temp_msg = await ctx.send(msg)
+    await asyncio.sleep(tempo)
+    await msg.delete()
 
 def iniciar_bot():
     # carrega as variáveis de ambiente (as variáveis que não podem ser públicas, como o token do Bot)
@@ -45,9 +57,7 @@ def iniciar_bot():
         embed = discord.Embed(title=f'Um administrador limpou {qtde} mensagens do chat', color=0x00afff)
         embed.set_author(name=f'🧹 O chat foi limpo!')
         embed.set_footer(text=f'Hoje às {horario}')
-        msg = await ctx.send(embed=embed)
-        await asyncio.sleep(30)
-        await msg.delete()
+        send_temp_message(ctx, embed, 30)
 
     @purge.error
     async def purge_error(ctx):
