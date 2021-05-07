@@ -43,7 +43,7 @@ def iniciar_bot():
 
         horario = datetime.now().strftime('%H:%M')
         embed = discord.Embed(title=f'Um administrador limpou {qtde} mensagens do chat', color=0x00afff)
-        embed.set_author(name=f'🧹 O chat foi limpo!')
+        embed.set_author(name=f'🧹 O chat foi limpo com sucesso!')
         embed.set_footer(text=f'Hoje às {horario}')
         msg = await ctx.send(embed=embed)
         await asyncio.sleep(30)
