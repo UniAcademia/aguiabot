@@ -1,6 +1,7 @@
 import os
 import asyncio
 import discord
+import models
 from dotenv import load_dotenv
 from discord.ext import commands
 from discord.ext.commands import has_permissions
@@ -8,6 +9,7 @@ from datetime import datetime
 
 
 def iniciar_bot():
+    models.criar_tabelas()
     # carrega as variáveis de ambiente (as variáveis que não podem ser públicas, como o token do Bot)
     load_dotenv()
     token = os.getenv('DISCORD_TOKEN')
