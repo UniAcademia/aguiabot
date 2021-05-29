@@ -4,7 +4,17 @@ from discord_slash import SlashCommand
 from dotenv import load_dotenv
 from discord.ext import commands
 
+eventos = ['on_ready']
 comandos = ['purge']
+
+
+def carregar_eventos(bot):
+    for evento in eventos:
+        try:
+            bot.load_extension(f'eventos.{evento}')
+        except Exception as e:
+            exc = f'{type(e).__name__}: {e}'
+            print(f'Erro ao carregar evento {evento}\n{exc}')
 
 
 def carregar_comandos(bot):
@@ -23,11 +33,8 @@ def iniciar_bot():
     bot = commands.Bot(command_prefix='!')
 
     slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)  # Não apagar essa linha
+    carregar_eventos(bot)
     carregar_comandos(bot)
-
-    @bot.event
-    async def on_ready():
-        print(f'{bot.user} se conectou ao Discord!')
 
     bot.run(token)
 
