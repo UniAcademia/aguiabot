@@ -32,7 +32,7 @@ def iniciar_bot():
     token = os.getenv('DISCORD_TOKEN')
     bot = commands.Bot(command_prefix='!')
 
-    slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)  # Não apagar essa linha
+    _ = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)  # Não apagar essa linha
     carregar_eventos(bot)
     carregar_comandos(bot)
 

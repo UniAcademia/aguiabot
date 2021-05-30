@@ -6,7 +6,7 @@ from discord_slash import cog_ext, SlashContext
 
 
 class Purge(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
     @cog_ext.cog_slash(name="purge", description="Limpa N mensagens do chat.", guild_ids=[constantes.guild_id],
