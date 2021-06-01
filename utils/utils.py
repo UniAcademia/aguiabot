@@ -1,3 +1,3 @@
 def somente_numeros(string):
     import re
-    return re.sub("[^0-9]", "", string)
+    return re.findall(r'\d+', string)[0]
