@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from discord.ext import commands
 
 eventos = ['on_ready']
-comandos = ['purge']
+comandos = ['purge', 'avisar']
 
 
 def carregar_eventos(bot):
