@@ -1,37 +1,35 @@
-import constantes
-from discord_slash.model import SlashCommandPermissionType
-from discord_slash.utils.manage_commands import create_permission
+from discord.ext.commands import has_permissions, Context
 from discord.ext import commands
-from discord_slash import cog_ext, SlashContext
 
 
 class Purge(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @cog_ext.cog_slash(name="purge", description="Limpa N mensagens do chat.", guild_ids=[constantes.guild_id],
-                       default_permission=False, permissions={
-            constantes.guild_id: [
-                create_permission(constantes.aguia_role_id, SlashCommandPermissionType.ROLE, True)
-            ]
-        })
-    async def purge(self, ctx: SlashContext, qtde: int = 1):
+    @commands.command()
+    @has_permissions(kick_members=True)
+    async def purge(self, ctx: Context, qtde: int = 1):
+        # region Filtra qtde
         if qtde > 100:
             qtde = 100
         else:
             if qtde < 1:
                 qtde = 1
+        # endregion
 
-        await ctx.send(f'Apagando {qtde} mensagens...', hidden=False, delete_after=1)
-        primeira = True
-        async for mensagem in ctx.channel.history(limit=qtde+1):
+        # region Apaga as mensagens
+        await ctx.message.delete()
+
+        async for mensagem in ctx.channel.history(limit=qtde):
             try:
-                if not primeira:
-                    await mensagem.delete()
-                else:
-                    primeira = False
+                await mensagem.delete()
             finally:
-                pass
+                break
+        # endregion
+
+    @purge.error
+    async def purge_error(self, ctx: Context):
+        await ctx.message.delete()
 
 
 def setup(bot):
