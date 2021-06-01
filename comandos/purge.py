@@ -7,8 +7,9 @@ class Purge(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    @has_permissions(kick_members=True)
+    @has_permissions(manage_messages=True)
     async def purge(self, ctx: Context, qtde: int = 1):
+        await ctx.message.delete()
         # region Filtra qtde
         if qtde > 100:
             qtde = 100
@@ -16,10 +17,7 @@ class Purge(commands.Cog):
             if qtde < 1:
                 qtde = 1
         # endregion
-
         # region Apaga as mensagens
-        await ctx.message.delete()
-
         async for mensagem in ctx.channel.history(limit=qtde):
             try:
                 await mensagem.delete()
