@@ -39,5 +39,6 @@ def iniciar_bot():
     bot.run(token)
 
 
+
 if __name__ == '__main__':
     iniciar_bot()
