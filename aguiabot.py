@@ -1,7 +1,7 @@
 import os
 import models
 from discord_slash import SlashCommand
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 from discord.ext import commands
 
 eventos = ['on_ready']
@@ -28,10 +28,10 @@ def carregar_comandos(bot):
 
 def iniciar_bot():
     models.criar_tabelas()  # carrega as tabelas do banco de dados
-#    load_dotenv()  # carrega as variáveis de ambiente (arquivo .env)
-#    token = os.getenv('DISCORD_TOKEN')
+    load_dotenv()  # carrega as variáveis de ambiente (arquivo .env)
+    token = os.getenv('DISCORD_TOKEN')
     bot = commands.Bot(command_prefix='!')
-    token = "ODIxODU5NjIwNTU3MTYwNDY4.YFJ2ag.ucLUvsFXrNZcyVh-SjpJYGLwV9s"
+
     _ = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)  # Não apagar essa linha
     carregar_eventos(bot)
     carregar_comandos(bot)

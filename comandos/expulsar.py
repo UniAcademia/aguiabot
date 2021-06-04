@@ -21,6 +21,7 @@ class Expulsar(commands.Cog):
         # endregion
 
         # region Validações
+
         try:
             if usuario.permissions_in(ctx.message.channel).kick_members:
                 return
