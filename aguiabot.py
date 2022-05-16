@@ -1,8 +1,8 @@
 import os
 import models
 from discord_slash import SlashCommand
-from dotenv import load_dotenv
 from discord.ext import commands
+from dotenv import load_dotenv
 
 eventos = ['on_ready']
 comandos = ['purge', 'avisar']
@@ -35,7 +35,6 @@ def iniciar_bot():
     _ = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)  # Não apagar essa linha
     carregar_eventos(bot)
     carregar_comandos(bot)
-
     bot.run(token)
 
 
