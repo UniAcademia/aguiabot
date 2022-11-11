@@ -1,5 +1,7 @@
 # Como rodar o bot:
-1. Instale as dependências: Na aba `Terminal`do PyCharm digite: `pip install -r requirements.txt`
+1. Instale as dependências: Na aba **Terminal** do PyCharm digite:  
+`python -m venv venv; cd .\venv\Scripts\; ./activate; pip install -r ../../requirements.txt`
+
 2. Crie uma nova aplicação no portal de desenvolvedores do Discord (https://discord.com/developers/applications)
 3. Na aba "Bot" adicione um Bot:
 
