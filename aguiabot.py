@@ -1,11 +1,12 @@
 import os
 import models
 from discord_slash import SlashCommand
+from discord import Intents
 from discord.ext import commands
 from dotenv import load_dotenv
 
 eventos = ['on_ready']
-comandos = ['purge', 'avisar']
+comandos = ['purge', 'avisar', 'expulsar', 'teste']
 
 
 def carregar_eventos(bot):
@@ -32,7 +33,7 @@ def iniciar_bot():
         token = os.getenv('DISCORD_TOKEN')
         if token != None:
             models.criar_tabelas()  # carrega as tabelas do banco de dados
-            bot = commands.Bot(command_prefix='!')
+            bot = commands.Bot(command_prefix='!', intents=Intents.all())
 
             _ = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)  # Não apagar essa linha
             carregar_eventos(bot)
